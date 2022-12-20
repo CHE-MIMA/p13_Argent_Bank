@@ -1,15 +1,20 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useDispatch } from "react-redux";
+import { logIn } from "../features/auth";
+import AuthContext from "../authContext";
+import { useNavigate } from 'react-router-dom';
 
 
 
 const FormSignIn = () => {
-    const [email, setUsername] = useState("");
+    const { setAuth } = useContext(AuthContext);
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     const connectLogin = (e) => {
         e.preventDefault();
-        // const emailError= document.querySelector('.username.error');
-        // const passwordError= document.querySelector('.password.error');
         axios({
             method: "post",
             url: `${process.env.REACT_APP_API_URL}/login`,
@@ -20,8 +25,19 @@ const FormSignIn = () => {
             },
         })
             .then((res) => {
-                console.log(res);
-                window.location = '/user';
+                console.log(res.data.body.token);
+
+                localStorage.setItem("token", res.data.body.token);
+                navigate("/user");
+                setAuth({ email, password });
+                setEmail("");
+                setPassword("");
+                dispatch(
+                    logIn({
+                        email: email,
+                        succesToken: res.data.body.token,
+                    })
+                );
             })
             .catch((err) => {
                 console.log(err)
@@ -29,6 +45,7 @@ const FormSignIn = () => {
 
 
     };
+    console.log(email, password);
     return (
         <div>
             <section className="sign-in-content">
@@ -38,7 +55,7 @@ const FormSignIn = () => {
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" name="username"
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                             value={email} />
                     </div>
                     {/* <div className="username error"></div> */}

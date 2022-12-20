@@ -1,16 +1,61 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import "../style/main.css";
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 
 const User = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") === null ) {
+      navigate("/Connexion");
+    }
+  }, []);
+  // const { setAuth } = useContext(AuthContext);
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLLastName] = useState("")
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate()
+
+      // axios({
+      //     method: "post",
+      //     url: `${process.env.REACT_APP_API_URL}/login`,
+      //     widthCredentials: true,
+      //     data: {
+      //         email,
+      //         password,
+      //     },
+      // })
+      //     .then((res) => {
+      //         console.log(res.data.body.token);
+
+      //         localStorage.setItem("token", res.data.body.token);
+      //         navigate("/user");
+      //         setAuth({ email, password });
+      //         setEmail("");
+      //         setPassword("");
+      //         dispatch(
+      //             logIn({
+      //                 email: email,
+      //                 succesToken: res.data.body.token,
+      //             })
+      //         );
+      //     })
+      //     .catch((err) => {
+      //         console.log(err)
+      //     })
+
+
+ 
+
     return (
         <div>
-       <nav className="main-nav">
+          <Navigation/>
+       {/* <nav className="main-nav">
       <NavLink className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
-          src="./img/argentBankLogo.png"
+          src={ logo }
           alt="Argent Bank Logo"
         />
         <h1 className="sr-only">Argent Bank</h1>
@@ -25,7 +70,7 @@ const User = () => {
           Sign Out
         </NavLink>
       </div>
-    </nav>
+    </nav> */}
     <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br />Tony Jarvis!</h1>

@@ -1,26 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+const initialState = {
+    email: null,
+    token: null,
+    firstName: null,
+    lastName: null,
+};
 
 const authSlice = createSlice({
     // le nom du slice
-    name: 'auth',
+    name: "auth",
     // le state initial
-    initialState: 'false',
+    initialState,
     // reducers permet de définir les actions et le reducer
     reducers: {
-        // l'action toggle ('theme/toggle')
-        singnIn: (state) => {
-            return state === 'false' ? 'true' : 'false'
+        logIn: (state, action) => {
+            state.email = action.payload.email;
+            state.token = action.payload.succesToken;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
         },
-        // l'action set ('theme/set')
-        singnUp: (state, action) => {
-            return action.payload
+        // l'action set 
+        logOut: (state) => {
+            state.email = null;
+            state.token = null;
+            state.firstName = null;
+            state.lastName = null;
         },
-    },
-})
 
-// on extrait les actions et le reducer
-const { actions, reducer } = authSlice
+    },
+});
 // on export chaque action individuellement
-export const { singnIn, singnUp } = actions
+export const { logIn, logOut } = authSlice.actions;
 // on export le reducer comme default export
-export default reducer
+export default authSlice.reducer;
