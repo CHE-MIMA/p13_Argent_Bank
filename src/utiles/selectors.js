@@ -1,5 +1,4 @@
 // ce selector est utilisé avec le hook useSeletor
-export const selectUser = (state) => state.auth.email;
-export const selectFirstName = (state) => state.auth.firstname;
-
+export const authSelector = (state) => (state.userReducer)
+// export const userSelector = (state) => (state.userReducer.user)
 

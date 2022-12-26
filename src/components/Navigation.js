@@ -11,22 +11,10 @@ import logo from "../img/argentBankLogo.png";
 
 
 const Navigation = () => {
-    // const firstName = useSelector(selectFirstName);
-    // console.log(firstName);
-    // const user = useSelector(selectUser);
-    // console.log(user);
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
 
-    // const Logout = async (e) => {
-    //     e.preventDefault();
-    //     dispatch((logOut));
-    //     console.log("Logout success!");
-    //     navigate("/");
-    // };
 
-    const token = localStorage.getItem("token");
-    console.log(token)
+    // const token = localStorage.getItem("token");
+    // console.log(token)
 
 
     return (
@@ -40,31 +28,26 @@ const Navigation = () => {
                     />
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
-                {token ? (
-                    <div>
-                        <NavLink className="main-nav-item" to="/user">
-                            <i className="fa fa-user-circle"></i>
+                {/* {token ? ( */}
+                <div>
+                    <NavLink className="main-nav-item" to="/connexion">
+                        <i className="fa fa-user-circle"></i>
+                        Sign In
+                    </NavLink>
+                </div>
 
-                        </NavLink>
-                        <NavLink className="main-nav-item" to="/" >
-                            <i className="fa fa-sign-out"></i>
-                            Sign Out
-                        </NavLink>
-                    </div>
+                {/* // ) : (
+                //     <div>
+                //         <NavLink className="main-nav-item" to="/user">
+                //             <i className="fa fa-user-circle"></i>
 
-
-
-
-                ) : (
-                    <div>
-                        <NavLink className="main-nav-item" to="/connexion">
-                            <i className="fa fa-user-circle"></i>
-                            Sign In
-                        </NavLink>
-                    </div>
-
-
-                )}
+                //         </NavLink>
+                //         <NavLink className="main-nav-item" to="/" >
+                //             <i className="fa fa-sign-out"></i>
+                //             Sign Out
+                //         </NavLink>
+                //     </div>
+                // )} */}
             </nav>
         </div>
     );

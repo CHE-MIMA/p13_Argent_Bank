@@ -1,51 +1,63 @@
-import axios from 'axios';
-import React, { useState, useContext } from 'react';
-import { useDispatch } from "react-redux";
-import { logIn } from "../features/auth";
-import AuthContext from "../authContext";
+// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+// import { logIn } from "../features/auth";
 import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../auth/authActions';
+import { authSelector } from '../utiles/selectors';
 
 
 
 const FormSignIn = () => {
-    const { setAuth } = useContext(AuthContext);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("")
+    const [identifiants, setIdentifiants] = useState({
+        email: '',
+        password: '',
+
+    })
+
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("")
+    const { token } = useSelector(authSelector);
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (token) navigate('/user')// Redirect on authentication
+    }, [token, navigate])
+
+
     const connectLogin = (e) => {
         e.preventDefault();
-        axios({
-            method: "post",
-            url: `${process.env.REACT_APP_API_URL}/login`,
-            widthCredentials: true,
-            data: {
-                email,
-                password,
-            },
-        })
-            .then((res) => {
-                console.log(res.data.body.token);
+        // axios({
+        //     method: "post",
+        //     url: `${process.env.REACT_APP_API_URL}/login`,
+        //     widthCredentials: true,
+        //     data: {
+        //         email,
+        //         password,
+        //     },
+        // })
+        //     .then((res) => {
+        //         console.log(res.data.body.token);
 
-                localStorage.setItem("token", res.data.body.token);
-                navigate("/user");
-                setAuth({ email, password });
-                setEmail("");
-                setPassword("");
-                dispatch(
-                    logIn({
-                        email: email,
-                        succesToken: res.data.body.token,
-                    })
-                );
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        //         localStorage.setItem("token", res.data.body.token);
+        // navigate("/user");
+        // setEmail("");
+        // setPassword("");
+        dispatch(
+            setLogin(identifiants)
+            // logIn({
+            //     email: email,
+            //     succesToken: res.data.body.token,
+            // })
+        );
+        // })
+        // .catch((err) => {
+        //     console.log(err)
+        // })
 
 
     };
-    console.log(email, password);
+
     return (
         <div>
             <section className="sign-in-content">
@@ -55,16 +67,16 @@ const FormSignIn = () => {
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
                         <input type="text" id="username" name="username"
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email} />
+                            onChange={(e) => setIdentifiants({ ...identifiants, email: e.target.value })}
+                            value={identifiants.email} />
                     </div>
                     {/* <div className="username error"></div> */}
                     <br />
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" name="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password} />
+                            onChange={(e) => setIdentifiants({ ...identifiants, password: e.target.value })}
+                            value={identifiants.password} />
                     </div>
                     {/* <div className="password error"></div> */}
                     <br />
