@@ -2,46 +2,35 @@ import React, { useEffect, useState } from 'react';
 import "../style/main.css";
 import Footer from '../components/Footer';
 // import { useNavigate } from 'react-router-dom';
-// import Navigation from '../components/Navigation';
-import { NavLink } from 'react-router-dom';
-import logo from '../img/argentBankLogo.png';
+import Navigation from "../components/Navigation";
+// import { NavLink } from 'react-router-dom';
+// import logo from '../img/argentBankLogo.png';
 import { authSelector } from '../utiles/selectors';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getUser } from '../auth/authActions'; 
 
+
 const User = () => {
   const [ isOpen, setIsOpen]= useState(false)
-  // const {token} = useSelector(authSelector);
-  const dataUser = useSelector(authSelector);
-  console.log(dataUser);
-
  
-
+  const dataUser = useSelector(authSelector);
+  // console.log(dataUser);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+
 
   useEffect(() => {
 
     if (dataUser.token ) {
-    dispatch(
-      getUser(dataUser.token)
-    
-   )
+      dispatch(
+        getUser(dataUser.token)
+        )
 }
-  // else{
-  //   navigate("/")
-  // }
-    
-  }, []);
- 
-
-
- 
-
+  })
     return (
         <div>
-       <nav className="main-nav">
+       <Navigation/>   
+       {/* <nav className="main-nav">
       <NavLink className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
@@ -56,12 +45,12 @@ const User = () => {
        {dataUser.user.firstName}
           
         </NavLink>
-        <NavLink className="main-nav-item" to="/">
+        <NavLink className="main-nav-item" to="/" onClick={() => dispatch( setLogout())}>
           <i className="fa fa-sign-out"></i>
           Sign Out
         </NavLink>
       </div>
-    </nav>
+    </nav> */}
     <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br /> {dataUser.user.firstName}  {dataUser.user.lastName}!</h1>
