@@ -14,9 +14,6 @@ const FormSignIn = () => {
         password: '',
 
     })
-
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("")
     const { token } = useSelector(authSelector);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,38 +21,12 @@ const FormSignIn = () => {
         if (token) navigate('/user')// Redirect on authentication
     }, [token, navigate])
 
-
     const connectLogin = (e) => {
         e.preventDefault();
-        // axios({
-        //     method: "post",
-        //     url: `${process.env.REACT_APP_API_URL}/login`,
-        //     widthCredentials: true,
-        //     data: {
-        //         email,
-        //         password,
-        //     },
-        // })
-        //     .then((res) => {
-        //         console.log(res.data.body.token);
-
-        //         localStorage.setItem("token", res.data.body.token);
-        // navigate("/user");
-        // setEmail("");
-        // setPassword("");
         dispatch(
             setLogin(identifiants)
-            // logIn({
-            //     email: email,
-            //     succesToken: res.data.body.token,
-            // })
+
         );
-        // })
-        // .catch((err) => {
-        //     console.log(err)
-        // })
-
-
     };
 
     return (
@@ -70,7 +41,7 @@ const FormSignIn = () => {
                             onChange={(e) => setIdentifiants({ ...identifiants, email: e.target.value })}
                             value={identifiants.email} />
                     </div>
-                    {/* <div className="username error"></div> */}
+
                     <br />
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
@@ -78,17 +49,15 @@ const FormSignIn = () => {
                             onChange={(e) => setIdentifiants({ ...identifiants, password: e.target.value })}
                             value={identifiants.password} />
                     </div>
-                    {/* <div className="password error"></div> */}
+
                     <br />
                     <div className="input-remember">
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    {/* <!-- PLACEHOLDER DUE TO STATIC SITE --> */}
+
                     <input type="submit" value="Sign In" className="sign-in-button" />
-                    {/* <!-- SHOULD BE THE BUTTON BELOW -->
-          <!-- <button class="sign-in-button">Sign In</button> -->
-          <!--  --> */}
+
                 </form>
             </section>
         </div>

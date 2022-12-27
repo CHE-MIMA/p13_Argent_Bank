@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import "../style/main.css";
 import Footer from '../components/Footer';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Navigation from "../components/Navigation";
 // import { NavLink } from 'react-router-dom';
 // import logo from '../img/argentBankLogo.png';
 import { authSelector } from '../utiles/selectors';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getUser } from '../auth/authActions'; 
+import { getUser, updateUser } from '../auth/authActions'; 
 
 
 const User = () => {
+  const [dataInput, setdataInput] = useState({
+    firstName: '',
+    lastName: '',
+})
   const [ isOpen, setIsOpen]= useState(false)
  
   const dataUser = useSelector(authSelector);
@@ -19,42 +23,41 @@ const User = () => {
   const dispatch = useDispatch();
 
 
-  useEffect(() => {
-
-    if (dataUser.token ) {
+  const navigate = useNavigate();
+    useEffect(() => {
+      if (dataUser.token){
       dispatch(
         getUser(dataUser.token)
         )
+}else{
+  navigate('/')// Redirect on home
 }
-  })
+  }, [dispatch, navigate, dataUser])
+
+  const updateForm = (e) => {
+    e.preventDefault();
+    dispatch(
+        updateUser(dataInput)
+
+    );
+};
     return (
         <div>
        <Navigation/>   
-       {/* <nav className="main-nav">
-      <NavLink className="main-nav-logo" to="/">
-        <img
-          className="main-nav-logo-image"
-          src={ logo }
-          alt="Argent Bank Logo"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </NavLink>
-      <div>
-        <NavLink className="main-nav-item" to="/user">
-          <i className="fa fa-user-circle"></i>
-       {dataUser.user.firstName}
-          
-        </NavLink>
-        <NavLink className="main-nav-item" to="/" onClick={() => dispatch( setLogout())}>
-          <i className="fa fa-sign-out"></i>
-          Sign Out
-        </NavLink>
-      </div>
-    </nav> */}
     <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br /> {dataUser.user.firstName}  {dataUser.user.lastName}!</h1>
-        {isOpen ? <input /> : 
+        {isOpen ?  <form action="" onSubmit={updateForm} id="update-form">
+          <input className='fistname-input' type="firstname" name="firstname"
+                            onChange={(e) => setdataInput({ ...dataInput, firstName: e.target.value })}
+                            value={dataInput.firstName}  /> 
+          <input className='lastname-input'type="lastname" name="lastname"
+                            onChange={(e) => setdataInput({ ...dataInput, lastName: e.target.value })}
+                            value={dataInput.lastName}  /> <br />
+          <button type="submit" className='save-button'> Save </button>
+          <button className='cancel-button'onClick={() => setIsOpen(false)}>Cancel</button>
+
+          </form> : 
          <button  className="edit-button" onClick={() => setIsOpen(true)}>Edit Name</button>
        }
       </div>

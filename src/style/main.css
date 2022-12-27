@@ -69,7 +69,30 @@ body {
   max-width: 100%;
   width: 200px;
 }
-
+.fistname-input{
+  margin-right: 20px;
+  height: 20px;
+}
+.lastname-input{
+  height: 20px;
+}
+.save-button{
+  margin-right: 20px;
+  margin-top: 10px;
+  width: 100px;
+  border-radius: 0;
+  border-color: #fff;
+  background-color: #fff;
+  color:#12002b;
+}
+.cancel-button{
+ width: 100px;
+  margin-top: 0px;
+  border-radius: 0;
+  background-color: #fff;
+  border-color: #fff;
+  color:#12002b;
+}
 .hero {
   background-image: url('../img/bank-tree.jpeg');
   background-position: 0 -50px;
