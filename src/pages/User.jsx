@@ -3,8 +3,6 @@ import "../style/main.css";
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import Navigation from "../components/Navigation";
-// import { NavLink } from 'react-router-dom';
-// import logo from '../img/argentBankLogo.png';
 import { authSelector } from '../utiles/selectors';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
