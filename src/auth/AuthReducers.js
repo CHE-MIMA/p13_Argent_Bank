@@ -3,10 +3,12 @@ import { LOGIN } from "./authActions";
 import { LOGOUT } from "./authActions";
 import { UPDATE_USER } from "./authActions";
 
+
 const initialState = {
     user: {},
     token: '',
-    isloading: false,
+
+
 };
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
@@ -15,13 +17,15 @@ export default function userReducer(state = initialState, action) {
             return {
                 token: action.payload.token,
                 user: {},
-                isloading: true,
+                isloading: 'false',
+
             }
         // Logout user
         case LOGOUT:
             return {
                 token: "",
                 user: {},
+                isloading: 'false',
 
             }
         // get user profile
@@ -29,13 +33,19 @@ export default function userReducer(state = initialState, action) {
             return {
                 token: action.payload.token,
                 user: action.payload.user,
+
+
             }
         // update user profile
         case UPDATE_USER:
             return {
                 token: action.payload.token,
                 user: action.payload.user,
+                isloading: 'false',
             }
+
+
+
         default:
             return state;
     }
