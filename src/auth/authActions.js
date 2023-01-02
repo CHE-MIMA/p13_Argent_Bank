@@ -76,14 +76,14 @@ export function setLogout() {
         }
     }
 }
-export function updateUser(dataInput) {
+export function updateUser(dataInput, token) {
     return async (dispatch) => {
 
         try {
             const response = await axios.put(`${process.env.REACT_APP_API_URL}/profile`, dataInput)
             const user = response.data.body
 
-            dispatch({ type: UPDATE_USER, payload: { user } })
+            dispatch({ type: UPDATE_USER, payload: { user, token } })
 
             console.log(user);
         } catch (error) {

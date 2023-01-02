@@ -30,14 +30,16 @@ const User = () => {
 }else{
   navigate('/')// Redirect on home
 }
-  }, [dispatch, navigate, dataUser])
+  }, [dataUser.token])
 
   const updateForm = (e) => {
     e.preventDefault();
     dispatch(
-        updateUser(dataInput)
+        updateUser(dataInput, dataUser.token)
+       
 
     );
+    setIsOpen(false);
 };
     return (
         <div>

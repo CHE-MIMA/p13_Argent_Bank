@@ -17,7 +17,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 token: action.payload.token,
                 user: {},
-                isloading: 'false',
+
 
             }
         // Logout user
@@ -25,7 +25,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 token: "",
                 user: {},
-                isloading: 'false',
+
 
             }
         // get user profile
@@ -41,7 +41,7 @@ export default function userReducer(state = initialState, action) {
             return {
                 token: action.payload.token,
                 user: action.payload.user,
-                isloading: 'false',
+
             }
 
 
