@@ -12,6 +12,7 @@ const FormSignIn = () => {
     const [identifiants, setIdentifiants] = useState({
         email: '',
         password: '',
+        remember: false,
 
     })
     const { token } = useSelector(authSelector);
@@ -52,7 +53,8 @@ const FormSignIn = () => {
 
                     <br />
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" />
+                        <input type="checkbox" id="remember-me"
+                            onChange={e => setIdentifiants({ ...identifiants, remember: e.target.checked })} />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
 

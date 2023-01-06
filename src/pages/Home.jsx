@@ -1,21 +1,14 @@
 import React from 'react';
-import  {useEffect} from 'react';
 import "../style/main.css";
 import Navigation from "../components/Navigation";
 import Footer from '../components/Footer';
 import iconChat from "../img/icon-chat.png";
 import iconMoney from "../img/icon-money.png";
 import iconSecurity from "../img/icon-security.png"
-import { useNavigate } from 'react-router-dom';
+
 
 
 const Home = () => {
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (localStorage.getItem("token") === null ) {
-  //     navigate("/Connexion");
-  //   }
-  // }, [navigate]);
     return (
         <div>
          <Navigation/>   
